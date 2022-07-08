@@ -1,0 +1,4256 @@
+{
+	"info": {
+		"_postman_id": "d60605c5-f8b1-4677-81bc-c1a6846dcac3",
+		"name": "REST",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21659492"
+	},
+	"item": [
+		{
+			"name": "FaaS",
+			"item": [
+				{
+					"name": "Get receipt",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Test Get Receipts\", function () {",
+									"",
+									"    const responseJson = pm.response.json();",
+									"    console.log(responseJson);",
+									"",
+									"    // 1. check status code",
+									"    pm.response.to.have.status(200);",
+									"",
+									"    // 2. check success or not",
+									"    pm.expect(responseJson.success).to.eql(true);",
+									"",
+									"    // 3. check data content",
+									"    if (responseJson.data == null || responseJson.data.json().receipts.length < 1) {",
+									"        // no record",
+									"        return ",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "BG-API-KEY",
+								"value": "{{BG-API-KEY}}",
+								"type": "text"
+							},
+							{
+								"key": "BG-API-TIMESTAMP",
+								"value": "{{BG-API-TIMESTAMP}}",
+								"type": "text"
+							},
+							{
+								"key": "BG-API-NONCE",
+								"value": "{{BG-API-NONCE}}",
+								"type": "text"
+							},
+							{
+								"key": "BG-API-SIGN",
+								"value": "{{BG-API-SIGN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"order_id\": \"00002_1\",\n  \"currency\": [\n    \"USDT\",\n    \"ETH\"\n  ],\n  \"start_date\": 1644398340, \n  \"end_date\": 1644571140,\n  \"pagination\": {\n      \"limit\": 15,\n      \"offset\": 3\n  } \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{base_url}}/v1/faas/receipt",
+							"protocol": "http",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"faas",
+								"receipt"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Mine Share",
+			"item": [
+				{
+					"name": "Query BITGIN addresses",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Test Query BITGIN Addresses\", function () {",
+									"",
+									"    const responseJson = pm.response.json();",
+									"    console.log(responseJson);",
+									"",
+									"    // 1. check status code",
+									"    pm.response.to.have.status(200);",
+									"",
+									"    // 2. check success or not",
+									"    pm.expect(responseJson.success).to.eql(true);",
+									"",
+									"    // 3. check data content",
+									"    if (responseJson.data == null || responseJson.data.json().bitgin_addresses.length < 1) {",
+									"        // no record",
+									"        return ",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "BG-API-KEY",
+								"value": "{{BG-API-KEY}}",
+								"type": "text"
+							},
+							{
+								"key": "BG-API-TIMESTAMP",
+								"value": "{{BG-API-TIMESTAMP}}",
+								"type": "text"
+							},
+							{
+								"key": "BG-API-NONCE",
+								"value": "{{BG-API-NONCE}}",
+								"type": "text"
+							},
+							{
+								"key": "BG-API-SIGN",
+								"value": "{{BG-API-SIGN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"currency\": \"ETH\",\n  \"addresses\": [\n    \"0xE8e6ee727a74488631448e3624A0D80B11A431B0\",\n    \"0xE8e6ee727a74488631448e3624A0D80B11A431B3\"\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{base_url}}/v1/mine/query",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"mine",
+								"query"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mine Share",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Test Mine Share\", function () {",
+									"",
+									"    const responseJson = pm.response.json();",
+									"    console.log(responseJson);",
+									"",
+									"    // 1. check status code",
+									"    pm.response.to.have.status(200);",
+									"",
+									"    // 2. check success or not",
+									"    pm.expect(responseJson.success).to.eql(true);",
+									"",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "BG-API-KEY",
+								"value": "{{BG-API-KEY}}",
+								"type": "text"
+							},
+							{
+								"key": "BG-API-TIMESTAMP",
+								"value": "{{BG-API-TIMESTAMP}}",
+								"type": "text"
+							},
+							{
+								"key": "BG-API-NONCE",
+								"value": "{{BG-API-NONCE}}",
+								"type": "text"
+							},
+							{
+								"key": "BG-API-SIGN",
+								"value": "{{BG-API-SIGN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"txid\": \"0xe3e06dfefd94e7ea3b267445505369695531ce00c4c14b165d0d7c4b586dc181\",\n  \"share\": [\n    {\n      \"user_id\": \"351c0599-17b9-44ad-b10e-29f93b528633\",\n      \"address\": \"0x14545e3C46aDf35673E2483c3EE957bdb5aF7311\",\n      \"amount\": 2.345\n    },\n    {\n      \"user_id\": \"1f69e74f-f296-458b-bcfb-8e5ee3232964\",\n      \"address\": \"0xE8e6ee727a74488631448e3624A0D80B11A431B0\",\n      \"amount\": 1.56\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{base_url}}/v1/mine/share",
+							"protocol": "http",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"mine",
+								"share"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Success",
+			"item": [
+				{
+					"name": "Exchange",
+					"item": [
+						{
+							"name": "Account",
+							"item": [
+								{
+									"name": "Get Account",
+									"item": [
+										{
+											"name": "Get Account Success",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"",
+															"",
+															"// pm.test(\"Your test name\", function () {",
+															"//     var jsonData = pm.response.json();",
+															"//     console.log(jsonData)",
+															"//     pm.expect(jsonData).to.have.all.keys(data);",
+															"// });",
+															"resp = pm.response.json()",
+															"const RespData = resp.data",
+															"pm.test(\"Response has expected fields\", () =>  {",
+															"    pm.expect(RespData).to.have.any.keys(\"id\")",
+															"    pm.expect(RespData).to.have.any.keys(\"email\")",
+															"    pm.expect(RespData).to.have.any.keys(\"kyc_level\")",
+															"    pm.expect(RespData).to.have.any.keys(\"referral_codes\")",
+															"    pm.expect(RespData).to.have.any.keys(\"referrer_code\")",
+															"});",
+															"",
+															"",
+															"pm.test(\"Response values have expected type\", () => {",
+															"    utils.VerifyUUID(RespData.id)",
+															"    pm.expect(RespData.email).to.be.a(\"string\")",
+															"    pm.expect(RespData.kyc_level).to.be.a(\"number\")",
+															"    pm.expect(RespData.referral_codes).to.be.an(\"array\")",
+															"    pm.expect(RespData.referrer_code).to.be.null",
+															"});",
+															"",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "BG-API-KEY",
+														"value": "{{BG-API-KEY}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-TIMESTAMP",
+														"value": "{{BG-API-TIMESTAMP}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-NONCE",
+														"value": "{{BG-API-NONCE}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-SIGN",
+														"value": "{{BG-API-SIGN}}",
+														"type": "text"
+													}
+												],
+												"url": {
+													"raw": "https://{{base_url}}/v1/exchange/account",
+													"protocol": "https",
+													"host": [
+														"{{base_url}}"
+													],
+													"path": [
+														"v1",
+														"exchange",
+														"account"
+													],
+													"query": [
+														{
+															"key": "aaa",
+															"value": null,
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": [
+												{
+													"name": "Get Account Success",
+													"originalRequest": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "BG-API-KEY",
+																"value": "{{BG-API-KEY}}",
+																"type": "text"
+															},
+															{
+																"key": "BG-API-TIMESTAMP",
+																"value": "{{BG-API-TIMESTAMP}}",
+																"type": "text"
+															},
+															{
+																"key": "BG-API-NONCE",
+																"value": "{{BG-API-NONCE}}",
+																"type": "text"
+															},
+															{
+																"key": "BG-API-SIGN",
+																"value": "{{BG-API-SIGN}}",
+																"type": "text"
+															}
+														],
+														"url": {
+															"raw": "http://{{base_url}}/v1/exchange/account",
+															"protocol": "http",
+															"host": [
+																"{{base_url}}"
+															],
+															"path": [
+																"v1",
+																"exchange",
+																"account"
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Date",
+															"value": "Wed, 29 Jun 2022 10:10:31 GMT"
+														},
+														{
+															"key": "Content-Type",
+															"value": "application/json; charset=UTF-8"
+														},
+														{
+															"key": "Transfer-Encoding",
+															"value": "chunked"
+														},
+														{
+															"key": "Connection",
+															"value": "keep-alive"
+														},
+														{
+															"key": "vary",
+															"value": "Origin"
+														},
+														{
+															"key": "x-request-id",
+															"value": "6BCmcQIplR46AIfJKTBvxZstBiYBXDLH"
+														},
+														{
+															"key": "CF-Cache-Status",
+															"value": "DYNAMIC"
+														},
+														{
+															"key": "Expect-CT",
+															"value": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\""
+														},
+														{
+															"key": "Report-To",
+															"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=3i5zhaDR0gDAYL64q6jIslbBXcR8BUNvA06jcpkJYCL5ohgv4yDXSbU2O26TPXqEl%2Bh5gXoKTugwkMCIKEgsNKS3s2A3Y%2FCqcJRMBuhDvP8pdXHmMTgdH9A31kLNTCO0\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+														},
+														{
+															"key": "NEL",
+															"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+														},
+														{
+															"key": "Server",
+															"value": "cloudflare"
+														},
+														{
+															"key": "CF-RAY",
+															"value": "722ddf72e8fb80dd-NRT"
+														},
+														{
+															"key": "Content-Encoding",
+															"value": "br"
+														},
+														{
+															"key": "alt-svc",
+															"value": "h3=\":443\"; ma=86400, h3-29=\":443\"; ma=86400"
+														}
+													],
+													"cookie": [],
+													"body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": \"52f2052d-9dae-4f28-8748-91ffac95ad64\",\n        \"email\": \"devin@bitgin.net\",\n        \"kyc_level\": 2,\n        \"referral_codes\": [\n            \"Ltb10P6dY9\"\n        ],\n        \"referrer_code\": null\n    }\n}"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Wallet",
+							"item": [
+								{
+									"name": "Get Balances",
+									"item": [
+										{
+											"name": "Get balances",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"resp = pm.response.json()",
+															"",
+															"",
+															"pm.test(\"Get all balances\", () => {",
+															"    pm.expect(resp.data).to.have.lengthOf(4)",
+															"})",
+															"",
+															"pm.test(\"Currencies type\", () => {",
+															"    for (var i=0;i<resp.data.length;i++){",
+															"        RespData = resp.data[i]",
+															"        pm.expect(RespData.currency).to.be.oneOf([\"BTC\",\"ETH\",\"USDT\",\"TWD\"])",
+															"    }",
+															"})",
+															"",
+															"console.log(pm.variables.get(\"String\"))"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "BG-API-KEY",
+														"value": "{{BG-API-KEY}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-TIMESTAMP",
+														"value": "{{BG-API-TIMESTAMP}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-NONCE",
+														"value": "{{BG-API-NONCE}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-SIGN",
+														"value": "{{BG-API-SIGN}}",
+														"type": "text"
+													}
+												],
+												"url": {
+													"raw": "https://{{base_url}}/v1/exchange/wallet/balances",
+													"protocol": "https",
+													"host": [
+														"{{base_url}}"
+													],
+													"path": [
+														"v1",
+														"exchange",
+														"wallet",
+														"balances"
+													],
+													"query": [
+														{
+															"key": "",
+															"value": "",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": [
+												{
+													"name": "Get balances",
+													"originalRequest": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "BG-API-KEY",
+																"value": "{{BG-API-KEY}}",
+																"type": "text"
+															},
+															{
+																"key": "BG-API-TIMESTAMP",
+																"value": "{{BG-API-TIMESTAMP}}",
+																"type": "text"
+															},
+															{
+																"key": "BG-API-NONCE",
+																"value": "{{BG-API-NONCE}}",
+																"type": "text"
+															},
+															{
+																"key": "BG-API-SIGN",
+																"value": "{{BG-API-SIGN}}",
+																"type": "text"
+															}
+														],
+														"url": {
+															"raw": "https://{{base_url}}/v1/exchange/wallet/balances?=",
+															"protocol": "https",
+															"host": [
+																"{{base_url}}"
+															],
+															"path": [
+																"v1",
+																"exchange",
+																"wallet",
+																"balances"
+															],
+															"query": [
+																{
+																	"key": "",
+																	"value": ""
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Date",
+															"value": "Tue, 05 Jul 2022 02:12:31 GMT"
+														},
+														{
+															"key": "Content-Type",
+															"value": "application/json; charset=UTF-8"
+														},
+														{
+															"key": "Transfer-Encoding",
+															"value": "chunked"
+														},
+														{
+															"key": "Connection",
+															"value": "keep-alive"
+														},
+														{
+															"key": "vary",
+															"value": "Origin"
+														},
+														{
+															"key": "x-request-id",
+															"value": "ogkVrVFqrF4701MNmSUFbjcG0GyxRpks"
+														},
+														{
+															"key": "CF-Cache-Status",
+															"value": "DYNAMIC"
+														},
+														{
+															"key": "Expect-CT",
+															"value": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\""
+														},
+														{
+															"key": "Report-To",
+															"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=4TR2ld7f2aLXTfDR85NDAtRJtHKpYkFESMx0OTqxig8TBVoJm9B9kbLs0K7mOpZzEQXKWybMgZs4FDoQZdLxF2osXVpKtByscQaiOFwBntwdZLsnuIL6YUpZZgYdmAJ4\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+														},
+														{
+															"key": "NEL",
+															"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+														},
+														{
+															"key": "Server",
+															"value": "cloudflare"
+														},
+														{
+															"key": "CF-RAY",
+															"value": "725c937d5f5daf48-NRT"
+														},
+														{
+															"key": "Content-Encoding",
+															"value": "br"
+														},
+														{
+															"key": "alt-svc",
+															"value": "h3=\":443\"; ma=86400, h3-29=\":443\"; ma=86400"
+														}
+													],
+													"cookie": [],
+													"body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"currency\": \"BTC\",\n            \"total\": \"0.000693\",\n            \"available\": \"0.000693\",\n            \"locked\": \"0\"\n        },\n        {\n            \"currency\": \"ETH\",\n            \"total\": \"0.013\",\n            \"available\": \"0.013\",\n            \"locked\": \"0\"\n        },\n        {\n            \"currency\": \"USDT\",\n            \"total\": \"30\",\n            \"available\": \"30\",\n            \"locked\": \"0\"\n        },\n        {\n            \"currency\": \"TWD\",\n            \"total\": \"1280.0207648\",\n            \"available\": \"1180.0207648\",\n            \"locked\": \"100\"\n        }\n    ]\n}"
+												}
+											]
+										},
+										{
+											"name": "Get balances BTC",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"resp = pm.response.json()",
+															"",
+															"const RespData = resp.data[0]",
+															"",
+															"pm.test(\"Currency type\", () => {",
+															"    pm.expect(RespData.currency).to.eql(\"BTC\")",
+															"})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "BG-API-KEY",
+														"value": "{{BG-API-KEY}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-TIMESTAMP",
+														"value": "{{BG-API-TIMESTAMP}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-NONCE",
+														"value": "{{BG-API-NONCE}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-SIGN",
+														"value": "{{BG-API-SIGN}}",
+														"type": "text"
+													}
+												],
+												"url": {
+													"raw": "https://{{base_url}}/v1/exchange/wallet/balances?currency=BTC",
+													"protocol": "https",
+													"host": [
+														"{{base_url}}"
+													],
+													"path": [
+														"v1",
+														"exchange",
+														"wallet",
+														"balances"
+													],
+													"query": [
+														{
+															"key": "currency",
+															"value": "BTC"
+														},
+														{
+															"key": "",
+															"value": "",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get balances ETH",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"resp = pm.response.json()",
+															"",
+															"const RespData = resp.data[0]",
+															"",
+															"pm.test(\"Currency type\", () => {",
+															"    pm.expect(RespData.currency).to.eql(\"ETH\")",
+															"})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "BG-API-KEY",
+														"value": "{{BG-API-KEY}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-TIMESTAMP",
+														"value": "{{BG-API-TIMESTAMP}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-NONCE",
+														"value": "{{BG-API-NONCE}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-SIGN",
+														"value": "{{BG-API-SIGN}}",
+														"type": "text"
+													}
+												],
+												"url": {
+													"raw": "https://{{base_url}}/v1/exchange/wallet/balances?currency=ETH",
+													"protocol": "https",
+													"host": [
+														"{{base_url}}"
+													],
+													"path": [
+														"v1",
+														"exchange",
+														"wallet",
+														"balances"
+													],
+													"query": [
+														{
+															"key": "currency",
+															"value": "ETH"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get balances USDT",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"resp = pm.response.json()",
+															"",
+															"",
+															"const RespData = resp.data[0]",
+															"",
+															"pm.test(\"Currency type\", () => {",
+															"    pm.expect(RespData.currency).to.eql(\"USDT\")",
+															"})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "BG-API-KEY",
+														"value": "{{BG-API-KEY}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-TIMESTAMP",
+														"value": "{{BG-API-TIMESTAMP}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-NONCE",
+														"value": "{{BG-API-NONCE}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-SIGN",
+														"value": "{{BG-API-SIGN}}",
+														"type": "text"
+													}
+												],
+												"url": {
+													"raw": "https://{{base_url}}/v1/exchange/wallet/balances?currency=USDT",
+													"protocol": "https",
+													"host": [
+														"{{base_url}}"
+													],
+													"path": [
+														"v1",
+														"exchange",
+														"wallet",
+														"balances"
+													],
+													"query": [
+														{
+															"key": "currency",
+															"value": "USDT"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get balances TWD",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"resp = pm.response.json()",
+															"",
+															"const RespData = resp.data[0]",
+															"",
+															"pm.test(\"Currency type\", () => {",
+															"    pm.expect(RespData.currency).to.eql(\"TWD\")",
+															"})"
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "BG-API-KEY",
+														"value": "{{BG-API-KEY}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-TIMESTAMP",
+														"value": "{{BG-API-TIMESTAMP}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-NONCE",
+														"value": "{{BG-API-NONCE}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-SIGN",
+														"value": "{{BG-API-SIGN}}",
+														"type": "text"
+													}
+												],
+												"url": {
+													"raw": "https://{{base_url}}/v1/exchange/wallet/balances?currency=TWD",
+													"protocol": "https",
+													"host": [
+														"{{base_url}}"
+													],
+													"path": [
+														"v1",
+														"exchange",
+														"wallet",
+														"balances"
+													],
+													"query": [
+														{
+															"key": "currency",
+															"value": "TWD"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													"resp = pm.response.json()",
+													"",
+													"pm.test(\"Response has expected fields\", () => {",
+													"    for(var i=0 ; i<resp.data.length ; i++){",
+													"        RespData = resp.data[i]",
+													"        pm.expect(RespData).to.have.any.keys(\"currency\")",
+													"        pm.expect(RespData).to.have.any.keys(\"total\")",
+													"        pm.expect(RespData).to.have.any.keys(\"available\")",
+													"        pm.expect(RespData).to.have.any.keys(\"locked\")",
+													"}})",
+													"",
+													"pm.test(\"Response values have expected type\", () => {",
+													"    for(var i=0 ; i<resp.data.length ; i++){",
+													"        pm.expect(RespData.currency).to.be.a(\"string\")",
+													"        pm.expect(Number(RespData.total)).to.be.a(\"number\")",
+													"        // Assert Converion of string to float not be NaN",
+													"        pm.expect(Number(RespData.total)).to.not.be.NaN",
+													"        pm.expect(Number(RespData.available)).to.not.be.NaN",
+													"        pm.expect(Number(RespData.locked)).to.not.be.NaN",
+													"    }",
+													"})"
+												]
+											}
+										}
+									]
+								},
+								{
+									"name": "Get Deposit History",
+									"item": [
+										{
+											"name": "Get deposits history",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"resp = pm.response.json()",
+															"",
+															"pm.test(\"Correct currency\", () => {",
+															"    for (var i=0;i<resp.data.length;i++){",
+															"        RespData = resp.data[i]",
+															"        pm.expect(RespData.currency).to.be.oneOf([\"BTX\",\"ETH\",\"USDT\",\"TWD\"])",
+															"    }",
+															"})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "BG-API-KEY",
+														"value": "{{BG-API-KEY}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-TIMESTAMP",
+														"value": "{{BG-API-TIMESTAMP}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-NONCE",
+														"value": "{{BG-API-NONCE}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-SIGN",
+														"value": "{{BG-API-SIGN}}",
+														"type": "text"
+													}
+												],
+												"url": {
+													"raw": "http://{{base_url}}/v1/exchange/wallet/history/deposit",
+													"protocol": "http",
+													"host": [
+														"{{base_url}}"
+													],
+													"path": [
+														"v1",
+														"exchange",
+														"wallet",
+														"history",
+														"deposit"
+													],
+													"query": [
+														{
+															"key": "start_time",
+															"value": "1634054400",
+															"disabled": true
+														},
+														{
+															"key": "end_time",
+															"value": "1634054400",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get deposits history BTC",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"resp = pm.response.json()",
+															"",
+															"pm.test(\"Correct currency\", () => {",
+															"    for (var i=0;i<resp.data.length;i++){",
+															"        RespData = resp.data[i]",
+															"        pm.expect(RespData.currency).to.be.eql(\"BTC\")",
+															"    }",
+															"    ",
+															"})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "BG-API-KEY",
+														"value": "{{BG-API-KEY}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-TIMESTAMP",
+														"value": "{{BG-API-TIMESTAMP}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-NONCE",
+														"value": "{{BG-API-NONCE}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-SIGN",
+														"value": "{{BG-API-SIGN}}",
+														"type": "text"
+													}
+												],
+												"url": {
+													"raw": "http://{{base_url}}/v1/exchange/wallet/history/deposit?currency=BTC",
+													"protocol": "http",
+													"host": [
+														"{{base_url}}"
+													],
+													"path": [
+														"v1",
+														"exchange",
+														"wallet",
+														"history",
+														"deposit"
+													],
+													"query": [
+														{
+															"key": "currency",
+															"value": "BTC"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get deposits history ETH",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"resp = pm.response.json()",
+															"",
+															"pm.test(\"Correct currency\", () => {",
+															"    for (var i=0;i<resp.data.length;i++){",
+															"        RespData = resp.data[i]",
+															"        pm.expect(RespData.currency).to.be.eql(\"ETH\")",
+															"    }",
+															"    ",
+															"})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "BG-API-KEY",
+														"value": "{{BG-API-KEY}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-TIMESTAMP",
+														"value": "{{BG-API-TIMESTAMP}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-NONCE",
+														"value": "{{BG-API-NONCE}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-SIGN",
+														"value": "{{BG-API-SIGN}}",
+														"type": "text"
+													}
+												],
+												"url": {
+													"raw": "http://{{base_url}}/v1/exchange/wallet/history/deposit?currency=ETH",
+													"protocol": "http",
+													"host": [
+														"{{base_url}}"
+													],
+													"path": [
+														"v1",
+														"exchange",
+														"wallet",
+														"history",
+														"deposit"
+													],
+													"query": [
+														{
+															"key": "currency",
+															"value": "ETH"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get deposits history USDT",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"resp = pm.response.json()",
+															"",
+															"pm.test(\"Correct currency\", () => {",
+															"    for (var i=0;i<resp.data.length;i++){",
+															"        RespData = resp.data[i]",
+															"        pm.expect(RespData.currency).to.be.eql(\"USDT\")",
+															"    }",
+															"    ",
+															"})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "BG-API-KEY",
+														"value": "{{BG-API-KEY}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-TIMESTAMP",
+														"value": "{{BG-API-TIMESTAMP}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-NONCE",
+														"value": "{{BG-API-NONCE}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-SIGN",
+														"value": "{{BG-API-SIGN}}",
+														"type": "text"
+													}
+												],
+												"url": {
+													"raw": "http://{{base_url}}/v1/exchange/wallet/history/deposit?currency=USDT",
+													"protocol": "http",
+													"host": [
+														"{{base_url}}"
+													],
+													"path": [
+														"v1",
+														"exchange",
+														"wallet",
+														"history",
+														"deposit"
+													],
+													"query": [
+														{
+															"key": "currency",
+															"value": "USDT"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get deposits history TWD",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"resp = pm.response.json()",
+															"",
+															"pm.test(\"Correct currency\", () => {",
+															"    for (var i=0;i<resp.data.length;i++){",
+															"        RespData = resp.data[i]",
+															"        pm.expect(RespData.currency).to.be.eql(\"TWD\")",
+															"    }",
+															"    ",
+															"})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "BG-API-KEY",
+														"value": "{{BG-API-KEY}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-TIMESTAMP",
+														"value": "{{BG-API-TIMESTAMP}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-NONCE",
+														"value": "{{BG-API-NONCE}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-SIGN",
+														"value": "{{BG-API-SIGN}}",
+														"type": "text"
+													}
+												],
+												"url": {
+													"raw": "http://{{base_url}}/v1/exchange/wallet/history/deposit?currency=TWD",
+													"protocol": "http",
+													"host": [
+														"{{base_url}}"
+													],
+													"path": [
+														"v1",
+														"exchange",
+														"wallet",
+														"history",
+														"deposit"
+													],
+													"query": [
+														{
+															"key": "currency",
+															"value": "TWD"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													"resp = pm.response.json()",
+													"",
+													"pm.test(\"Response has expected fields\", () => {",
+													"    for(var i=0 ; i<resp.data.length ; i++){",
+													"        RespData = resp.data[i]",
+													"        pm.expect(RespData).to.have.any.keys(\"id\")",
+													"        pm.expect(RespData).to.have.any.keys(\"status\")",
+													"        pm.expect(RespData).to.have.any.keys(\"currency\")",
+													"        pm.expect(RespData).to.have.any.keys(\"chain\")",
+													"        pm.expect(RespData).to.have.any.keys(\"amount\")",
+													"        pm.expect(RespData).to.have.any.keys(\"fee\")",
+													"        pm.expect(RespData).to.have.any.keys(\"fee_currency\")",
+													"        // pm.expect(RespData).to.have.any.keys(\"txid\")",
+													"        pm.expect(RespData).to.have.any.keys(\"created_at\")",
+													"        pm.expect(RespData).to.have.any.keys(\"updated_at\")",
+													"}})",
+													"",
+													"pm.test(\"Response values have expected type\", () => {",
+													"    for(var i=0 ; i<resp.data.length ; i++){",
+													"        RespData = resp.data[i]",
+													"        utils.VerifyUUID(RespData.id)",
+													"        pm.expect(RespData.status).to.be.a(\"string\")",
+													"        pm.expect(RespData.currency).to.be.a(\"string\")",
+													"        // pm.expect(RespData.chain).to.be.a(\"string\")",
+													"        pm.expect(RespData.fee_currency).to.be.a(\"string\")",
+													"        // pm.expect(RespData.txid).to.be.a(\"string\")",
+													"        pm.expect(Number(RespData.amount)).to.not.be.NaN",
+													"        pm.expect(Number(RespData.fee)).to.not.be.NaN",
+													"        pm.expect(Number(RespData.created_at)).to.not.be.NaN",
+													"        pm.expect(RespData.updated_at).to.be.a(\"number\")",
+													"        pm.expect(RespData.created_at).to.be.a(\"number\")",
+													"    }",
+													"})"
+												]
+											}
+										}
+									]
+								},
+								{
+									"name": "Get Deposit Address",
+									"item": [
+										{
+											"name": "Get deposit addresses BTC-Bitcoin",
+											"event": [
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															""
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"resp = pm.response.json()",
+															"const RespData = resp.data[0]",
+															"pm.test(\"Address\", () => {",
+															"    pm.expect(RespData.chain).to.be.eql(\"Bitcoin\")",
+															"})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "BG-API-KEY",
+														"value": "{{BG-API-KEY}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-TIMESTAMP",
+														"value": "{{BG-API-TIMESTAMP}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-NONCE",
+														"value": "{{BG-API-NONCE}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-SIGN",
+														"value": "{{BG-API-SIGN}}",
+														"type": "text"
+													}
+												],
+												"url": {
+													"raw": "http://{{base_url}}/v1/exchange/wallet/address/deposit?currency=BTC&chain=Bitcoin",
+													"protocol": "http",
+													"host": [
+														"{{base_url}}"
+													],
+													"path": [
+														"v1",
+														"exchange",
+														"wallet",
+														"address",
+														"deposit"
+													],
+													"query": [
+														{
+															"key": "currency",
+															"value": "BTC"
+														},
+														{
+															"key": "chain",
+															"value": "Bitcoin"
+														}
+													]
+												}
+											},
+											"response": [
+												{
+													"name": "Get deposit addresses BTC-Bitcoin",
+													"originalRequest": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "BG-API-KEY",
+																"value": "{{BG-API-KEY}}",
+																"type": "text"
+															},
+															{
+																"key": "BG-API-TIMESTAMP",
+																"value": "{{BG-API-TIMESTAMP}}",
+																"type": "text"
+															},
+															{
+																"key": "BG-API-NONCE",
+																"value": "{{BG-API-NONCE}}",
+																"type": "text"
+															},
+															{
+																"key": "BG-API-SIGN",
+																"value": "{{BG-API-SIGN}}",
+																"type": "text"
+															}
+														],
+														"url": {
+															"raw": "http://{{base_url}}/v1/exchange/wallet/address/deposit?currency=BTC&chain=Bitcoin",
+															"protocol": "http",
+															"host": [
+																"{{base_url}}"
+															],
+															"path": [
+																"v1",
+																"exchange",
+																"wallet",
+																"address",
+																"deposit"
+															],
+															"query": [
+																{
+																	"key": "currency",
+																	"value": "BTC"
+																},
+																{
+																	"key": "chain",
+																	"value": "Bitcoin"
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Date",
+															"value": "Thu, 30 Jun 2022 06:44:12 GMT"
+														},
+														{
+															"key": "Content-Type",
+															"value": "application/json; charset=UTF-8"
+														},
+														{
+															"key": "Transfer-Encoding",
+															"value": "chunked"
+														},
+														{
+															"key": "Connection",
+															"value": "keep-alive"
+														},
+														{
+															"key": "vary",
+															"value": "Origin"
+														},
+														{
+															"key": "x-request-id",
+															"value": "yFBOfaPzoHTeo6K6HNIkiqay6QChmgqL"
+														},
+														{
+															"key": "CF-Cache-Status",
+															"value": "DYNAMIC"
+														},
+														{
+															"key": "Expect-CT",
+															"value": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\""
+														},
+														{
+															"key": "Report-To",
+															"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=ZVuaz3aubQ%2FbftjIbGh35jlusUrTM%2FuuL1qEctETf5W4s3%2BpKJdXdf7yGflaeRTLaFQ5LlZwDqLKEgI0CHaTM58bpv9cFEZLByioF%2FP0JKMrB3j%2FTiDb9ViPruIScyGH\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+														},
+														{
+															"key": "NEL",
+															"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+														},
+														{
+															"key": "Server",
+															"value": "cloudflare"
+														},
+														{
+															"key": "CF-RAY",
+															"value": "7234ee9a5c307e7c-LAX"
+														},
+														{
+															"key": "Content-Encoding",
+															"value": "br"
+														},
+														{
+															"key": "alt-svc",
+															"value": "h3=\":443\"; ma=86400, h3-29=\":443\"; ma=86400"
+														}
+													],
+													"cookie": [],
+													"body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"chain\": \"Bitcoin\",\n            \"address\": \"2N8bYPLXBp7srUSXFdcEGohRKM6upvB7Djt\"\n        }\n    ]\n}"
+												}
+											]
+										},
+										{
+											"name": "Get deposit addresses ETH-Ethereum",
+											"event": [
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															""
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"resp = pm.response.json()",
+															"const RespData = resp.data[0]",
+															"pm.test(\"Address\", () => {",
+															"    pm.expect(RespData.chain).to.be.eql(\"Ethereum\")",
+															"})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "BG-API-KEY",
+														"value": "{{BG-API-KEY}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-TIMESTAMP",
+														"value": "{{BG-API-TIMESTAMP}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-NONCE",
+														"value": "{{BG-API-NONCE}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-SIGN",
+														"value": "{{BG-API-SIGN}}",
+														"type": "text"
+													}
+												],
+												"url": {
+													"raw": "https://{{base_url}}/v1/exchange/wallet/address/deposit?currency=ETH&chain=Ethereum",
+													"protocol": "https",
+													"host": [
+														"{{base_url}}"
+													],
+													"path": [
+														"v1",
+														"exchange",
+														"wallet",
+														"address",
+														"deposit"
+													],
+													"query": [
+														{
+															"key": "currency",
+															"value": "ETH"
+														},
+														{
+															"key": "chain",
+															"value": "Ethereum"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get deposit addresses USDT",
+											"event": [
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															""
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"resp = pm.response.json()",
+															"pm.test(\"Address\", () => {",
+															"    for (var i=0;i<resp.data.length;i++){",
+															"        RespData = resp.data[i]",
+															"        pm.expect(RespData.chain).to.be.oneOf([\"Ethereum\",\"Tron\"])",
+															"    }",
+															"})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "BG-API-KEY",
+														"value": "{{BG-API-KEY}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-TIMESTAMP",
+														"value": "{{BG-API-TIMESTAMP}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-NONCE",
+														"value": "{{BG-API-NONCE}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-SIGN",
+														"value": "{{BG-API-SIGN}}",
+														"type": "text"
+													}
+												],
+												"url": {
+													"raw": "https://{{base_url}}/v1/exchange/wallet/address/deposit?currency=USDT",
+													"protocol": "https",
+													"host": [
+														"{{base_url}}"
+													],
+													"path": [
+														"v1",
+														"exchange",
+														"wallet",
+														"address",
+														"deposit"
+													],
+													"query": [
+														{
+															"key": "currency",
+															"value": "USDT"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get deposit addresses USDT-Tron",
+											"event": [
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															""
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"resp = pm.response.json()",
+															"const RespData = resp.data[0]",
+															"pm.test(\"Address\", () => {",
+															"    pm.expect(RespData.chain).to.be.eql(\"Tron\")",
+															"})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "BG-API-KEY",
+														"value": "{{BG-API-KEY}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-TIMESTAMP",
+														"value": "{{BG-API-TIMESTAMP}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-NONCE",
+														"value": "{{BG-API-NONCE}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-SIGN",
+														"value": "{{BG-API-SIGN}}",
+														"type": "text"
+													}
+												],
+												"url": {
+													"raw": "https://{{base_url}}/v1/exchange/wallet/address/deposit?currency=USDT&chain=Tron",
+													"protocol": "https",
+													"host": [
+														"{{base_url}}"
+													],
+													"path": [
+														"v1",
+														"exchange",
+														"wallet",
+														"address",
+														"deposit"
+													],
+													"query": [
+														{
+															"key": "currency",
+															"value": "USDT"
+														},
+														{
+															"key": "chain",
+															"value": "Tron"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get deposit addresses USDT-Ethereum",
+											"event": [
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															""
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"resp = pm.response.json()",
+															"const RespData = resp.data[0]",
+															"pm.test(\"Address\", () => {",
+															"    pm.expect(RespData.chain).to.be.eql(\"Ethereum\")",
+															"})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "BG-API-KEY",
+														"value": "{{BG-API-KEY}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-TIMESTAMP",
+														"value": "{{BG-API-TIMESTAMP}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-NONCE",
+														"value": "{{BG-API-NONCE}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-SIGN",
+														"value": "{{BG-API-SIGN}}",
+														"type": "text"
+													}
+												],
+												"url": {
+													"raw": "https://{{base_url}}/v1/exchange/wallet/address/deposit?currency=USDT&chain=Ethereum",
+													"protocol": "https",
+													"host": [
+														"{{base_url}}"
+													],
+													"path": [
+														"v1",
+														"exchange",
+														"wallet",
+														"address",
+														"deposit"
+													],
+													"query": [
+														{
+															"key": "currency",
+															"value": "USDT"
+														},
+														{
+															"key": "chain",
+															"value": "Ethereum"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													"resp = pm.response.json()",
+													"",
+													"pm.test(\"Response has expected fields\", () => {",
+													"    for(var i=0 ; i<resp.data.length ; i++){",
+													"        RespData = resp.data[i]",
+													"        pm.expect(RespData).to.have.any.keys(\"chain\")",
+													"        pm.expect(RespData).to.have.any.keys(\"address\")",
+													"}})",
+													"",
+													"pm.test(\"Response values have expected type\", () => {",
+													"    for(var i=0 ; i<resp.data.length ; i++){",
+													"        RespData = resp.data[i]",
+													"        pm.expect(RespData.chain).to.be.a(\"string\")",
+													"        pm.expect(RespData.address).to.be.a(\"string\")",
+													"    }",
+													"})"
+												]
+											}
+										}
+									]
+								},
+								{
+									"name": "Get Saved Address",
+									"item": [
+										{
+											"name": "Get saved addresses BTC-Bitcoin",
+											"event": [
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															""
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"resp = pm.response.json()",
+															"const RespData = resp.data[0]",
+															"pm.test(\"Address\", () => {",
+															"    pm.expect(RespData.chain).to.be.eql(\"Bitcoin\")",
+															"    pm.expect(RespData.currency).to.be.eql(\"BTC\")",
+															"})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "BG-API-KEY",
+														"value": "{{BG-API-KEY}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-TIMESTAMP",
+														"value": "{{BG-API-TIMESTAMP}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-NONCE",
+														"value": "{{BG-API-NONCE}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-SIGN",
+														"value": "{{BG-API-SIGN}}",
+														"type": "text"
+													}
+												],
+												"url": {
+													"raw": "http://{{base_url}}/v1/exchange/wallet/address/saved?currency=BTC&chain=Bitcoin",
+													"protocol": "http",
+													"host": [
+														"{{base_url}}"
+													],
+													"path": [
+														"v1",
+														"exchange",
+														"wallet",
+														"address",
+														"saved"
+													],
+													"query": [
+														{
+															"key": "currency",
+															"value": "BTC"
+														},
+														{
+															"key": "chain",
+															"value": "Bitcoin"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get saved addresses ETH-Ethereum",
+											"event": [
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															""
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"resp = pm.response.json()",
+															"const RespData = resp.data[0]",
+															"pm.test(\"Address\", () => {",
+															"    pm.expect(RespData.chain).to.be.eql(\"Ethereum\")",
+															"    pm.expect(RespData.currency).to.be.eql(\"ETH\")",
+															"})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "BG-API-KEY",
+														"value": "{{BG-API-KEY}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-TIMESTAMP",
+														"value": "{{BG-API-TIMESTAMP}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-NONCE",
+														"value": "{{BG-API-NONCE}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-SIGN",
+														"value": "{{BG-API-SIGN}}",
+														"type": "text"
+													}
+												],
+												"url": {
+													"raw": "http://{{base_url}}/v1/exchange/wallet/address/saved?currency=ETH&chain=Ethereum",
+													"protocol": "http",
+													"host": [
+														"{{base_url}}"
+													],
+													"path": [
+														"v1",
+														"exchange",
+														"wallet",
+														"address",
+														"saved"
+													],
+													"query": [
+														{
+															"key": "currency",
+															"value": "ETH"
+														},
+														{
+															"key": "chain",
+															"value": "Ethereum"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get saved addresses USDT",
+											"event": [
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															""
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"resp = pm.response.json()",
+															"pm.test(\"Address\", () => {",
+															"    for (var i=0;i<resp.data.length;i++){",
+															"        RespData = resp.data[i]",
+															"        pm.expect(RespData.chain).to.be.oneOf([\"Tron\",\"Ethereum\"])",
+															"        pm.expect(RespData.currency).to.be.eql(\"USDT\")",
+															"    }",
+															"})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "BG-API-KEY",
+														"value": "{{BG-API-KEY}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-TIMESTAMP",
+														"value": "{{BG-API-TIMESTAMP}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-NONCE",
+														"value": "{{BG-API-NONCE}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-SIGN",
+														"value": "{{BG-API-SIGN}}",
+														"type": "text"
+													}
+												],
+												"url": {
+													"raw": "http://{{base_url}}/v1/exchange/wallet/address/saved?currency=USDT",
+													"protocol": "http",
+													"host": [
+														"{{base_url}}"
+													],
+													"path": [
+														"v1",
+														"exchange",
+														"wallet",
+														"address",
+														"saved"
+													],
+													"query": [
+														{
+															"key": "currency",
+															"value": "USDT"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get saved addresses USDT-Tron",
+											"event": [
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															""
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"resp = pm.response.json()",
+															"const RespData = resp.data[0]",
+															"pm.test(\"Address\", () => {",
+															"    pm.expect(RespData.chain).to.be.eql(\"Tron\")",
+															"    pm.expect(RespData.currency).to.be.eql(\"USDT\")",
+															"})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "BG-API-KEY",
+														"value": "{{BG-API-KEY}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-TIMESTAMP",
+														"value": "{{BG-API-TIMESTAMP}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-NONCE",
+														"value": "{{BG-API-NONCE}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-SIGN",
+														"value": "{{BG-API-SIGN}}",
+														"type": "text"
+													}
+												],
+												"url": {
+													"raw": "http://{{base_url}}/v1/exchange/wallet/address/saved?currency=USDT&chain=Tron",
+													"protocol": "http",
+													"host": [
+														"{{base_url}}"
+													],
+													"path": [
+														"v1",
+														"exchange",
+														"wallet",
+														"address",
+														"saved"
+													],
+													"query": [
+														{
+															"key": "currency",
+															"value": "USDT"
+														},
+														{
+															"key": "chain",
+															"value": "Tron"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get saved addresses USDT-Ethereum",
+											"event": [
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															""
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"resp = pm.response.json()",
+															"const RespData = resp.data[0]",
+															"pm.test(\"Address\", () => {",
+															"    pm.expect(RespData.chain).to.be.eql(\"Ethereum\")",
+															"    pm.expect(RespData.currency).to.be.eql(\"USDT\")",
+															"})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "BG-API-KEY",
+														"value": "{{BG-API-KEY}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-TIMESTAMP",
+														"value": "{{BG-API-TIMESTAMP}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-NONCE",
+														"value": "{{BG-API-NONCE}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-SIGN",
+														"value": "{{BG-API-SIGN}}",
+														"type": "text"
+													}
+												],
+												"url": {
+													"raw": "http://{{base_url}}/v1/exchange/wallet/address/saved?currency=USDT&chain=Ethereum",
+													"protocol": "http",
+													"host": [
+														"{{base_url}}"
+													],
+													"path": [
+														"v1",
+														"exchange",
+														"wallet",
+														"address",
+														"saved"
+													],
+													"query": [
+														{
+															"key": "currency",
+															"value": "USDT"
+														},
+														{
+															"key": "chain",
+															"value": "Ethereum"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													"resp = pm.response.json()",
+													"",
+													"pm.test(\"Response has expected fields\", () => {",
+													"    for(var i=0 ; i<resp.data.length ; i++){",
+													"        RespData = resp.data[i]",
+													"        pm.expect(RespData).to.have.any.keys(\"id\")",
+													"        pm.expect(RespData).to.have.any.keys(\"name\")",
+													"        pm.expect(RespData).to.have.any.keys(\"chain\")",
+													"        pm.expect(RespData).to.have.any.keys(\"currency\")",
+													"        pm.expect(RespData).to.have.any.keys(\"address\")",
+													"}})",
+													"",
+													"pm.test(\"Response values have expected type\", () => {",
+													"    for(var i=0 ; i<resp.data.length ; i++){",
+													"        RespData = resp.data[i]",
+													"        utils.VerifyUUID(RespData.id)",
+													"        pm.expect(RespData.name).to.be.a(\"string\")",
+													"        pm.expect(RespData.chain).to.be.a(\"string\")",
+													"        pm.expect(RespData.currency).to.be.a(\"string\")",
+													"        pm.expect(RespData.address).to.be.a(\"string\")",
+													"    }",
+													"})"
+												]
+											}
+										}
+									]
+								},
+								{
+									"name": "Get Withdrawal History",
+									"item": [
+										{
+											"name": "Get withdrawals history",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"resp = pm.response.json()",
+															"",
+															"pm.test(\"Correct currency\", () => {",
+															"    for (var i=0;i<resp.data.length;i++){",
+															"        RespData = resp.data[i]",
+															"        pm.expect(RespData.currency).to.be.oneOf([\"BTX\",\"ETH\",\"USDT\",\"TWD\"])",
+															"    }",
+															"})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "BG-API-KEY",
+														"value": "{{BG-API-KEY}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-TIMESTAMP",
+														"value": "{{BG-API-TIMESTAMP}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-NONCE",
+														"value": "{{BG-API-NONCE}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-SIGN",
+														"value": "{{BG-API-SIGN}}",
+														"type": "text"
+													}
+												],
+												"url": {
+													"raw": "http://{{base_url}}/v1/exchange/wallet/history/withdrawal",
+													"protocol": "http",
+													"host": [
+														"{{base_url}}"
+													],
+													"path": [
+														"v1",
+														"exchange",
+														"wallet",
+														"history",
+														"withdrawal"
+													],
+													"query": [
+														{
+															"key": "start_time",
+															"value": "1634054400",
+															"disabled": true
+														},
+														{
+															"key": "end_time",
+															"value": "1634054400",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get withdrawals history BTC",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"resp = pm.response.json()",
+															"",
+															"pm.test(\"Correct currency\", () => {",
+															"    for (var i=0;i<resp.data.length;i++){",
+															"        RespData = resp.data[i]",
+															"        pm.expect(RespData.currency).to.be.eql(\"BTC\")",
+															"    }",
+															"    ",
+															"})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "BG-API-KEY",
+														"value": "{{BG-API-KEY}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-TIMESTAMP",
+														"value": "{{BG-API-TIMESTAMP}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-NONCE",
+														"value": "{{BG-API-NONCE}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-SIGN",
+														"value": "{{BG-API-SIGN}}",
+														"type": "text"
+													}
+												],
+												"url": {
+													"raw": "http://{{base_url}}/v1/exchange/wallet/history/withdrawal?currency=BTC",
+													"protocol": "http",
+													"host": [
+														"{{base_url}}"
+													],
+													"path": [
+														"v1",
+														"exchange",
+														"wallet",
+														"history",
+														"withdrawal"
+													],
+													"query": [
+														{
+															"key": "currency",
+															"value": "BTC"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get withdrawals history ETH",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"resp = pm.response.json()",
+															"",
+															"pm.test(\"Correct currency\", () => {",
+															"    for (var i=0;i<resp.data.length;i++){",
+															"        RespData = resp.data[i]",
+															"        pm.expect(RespData.currency).to.be.eql(\"ETH\")",
+															"    }",
+															"    ",
+															"})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "BG-API-KEY",
+														"value": "{{BG-API-KEY}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-TIMESTAMP",
+														"value": "{{BG-API-TIMESTAMP}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-NONCE",
+														"value": "{{BG-API-NONCE}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-SIGN",
+														"value": "{{BG-API-SIGN}}",
+														"type": "text"
+													}
+												],
+												"url": {
+													"raw": "http://{{base_url}}/v1/exchange/wallet/history/withdrawal?currency=ETH",
+													"protocol": "http",
+													"host": [
+														"{{base_url}}"
+													],
+													"path": [
+														"v1",
+														"exchange",
+														"wallet",
+														"history",
+														"withdrawal"
+													],
+													"query": [
+														{
+															"key": "currency",
+															"value": "ETH"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get withdrawals history USDT",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"resp = pm.response.json()",
+															"",
+															"pm.test(\"Correct currency\", () => {",
+															"    for (var i=0;i<resp.data.length;i++){",
+															"        RespData = resp.data[i]",
+															"        pm.expect(RespData.currency).to.be.eql(\"USDT\")",
+															"    }",
+															"    ",
+															"})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "BG-API-KEY",
+														"value": "{{BG-API-KEY}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-TIMESTAMP",
+														"value": "{{BG-API-TIMESTAMP}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-NONCE",
+														"value": "{{BG-API-NONCE}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-SIGN",
+														"value": "{{BG-API-SIGN}}",
+														"type": "text"
+													}
+												],
+												"url": {
+													"raw": "http://{{base_url}}/v1/exchange/wallet/history/withdrawal?currency=USDT",
+													"protocol": "http",
+													"host": [
+														"{{base_url}}"
+													],
+													"path": [
+														"v1",
+														"exchange",
+														"wallet",
+														"history",
+														"withdrawal"
+													],
+													"query": [
+														{
+															"key": "currency",
+															"value": "USDT"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get withdrawals history TWD",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"resp = pm.response.json()",
+															"",
+															"pm.test(\"Correct currency\", () => {",
+															"    for (var i=0;i<resp.data.length;i++){",
+															"        RespData = resp.data[i]",
+															"        pm.expect(RespData.currency).to.be.eql(\"TWD\")",
+															"    }",
+															"    ",
+															"})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "BG-API-KEY",
+														"value": "{{BG-API-KEY}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-TIMESTAMP",
+														"value": "{{BG-API-TIMESTAMP}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-NONCE",
+														"value": "{{BG-API-NONCE}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-SIGN",
+														"value": "{{BG-API-SIGN}}",
+														"type": "text"
+													}
+												],
+												"url": {
+													"raw": "http://{{base_url}}/v1/exchange/wallet/history/withdrawal?currency=TWD",
+													"protocol": "http",
+													"host": [
+														"{{base_url}}"
+													],
+													"path": [
+														"v1",
+														"exchange",
+														"wallet",
+														"history",
+														"withdrawal"
+													],
+													"query": [
+														{
+															"key": "currency",
+															"value": "TWD"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													"resp = pm.response.json()",
+													"",
+													"pm.test(\"Response has expected fields\", () => {",
+													"    for(var i=0 ; i<resp.data.length ; i++){",
+													"        RespData = resp.data[i]",
+													"        pm.expect(RespData).to.have.any.keys(\"id\")",
+													"        pm.expect(RespData).to.have.any.keys(\"status\")",
+													"        pm.expect(RespData).to.have.any.keys(\"currency\")",
+													"        pm.expect(RespData).to.have.any.keys(\"chain\")",
+													"        pm.expect(RespData).to.have.any.keys(\"amount\")",
+													"        pm.expect(RespData).to.have.any.keys(\"fee\")",
+													"        pm.expect(RespData).to.have.any.keys(\"fee_currency\")",
+													"        // pm.expect(RespData).to.have.any.keys(\"txid\")",
+													"        pm.expect(RespData).to.have.any.keys(\"created_at\")",
+													"        pm.expect(RespData).to.have.any.keys(\"updated_at\")",
+													"}})",
+													"",
+													"pm.test(\"Response values have expected type\", () => {",
+													"    for(var i=0 ; i<resp.data.length ; i++){",
+													"        RespData = resp.data[i]",
+													"        utils.VerifyUUID(RespData.id)",
+													"        pm.expect(RespData.status).to.be.a(\"string\")",
+													"        pm.expect(RespData.currency).to.be.a(\"string\")",
+													"        // pm.expect(RespData.chain).to.be.a(\"string\")",
+													"        pm.expect(RespData.fee_currency).to.be.a(\"string\")",
+													"        // pm.expect(RespData.txid).to.be.a(\"string\")",
+													"        pm.expect(Number(RespData.amount)).to.not.be.NaN",
+													"        pm.expect(Number(RespData.fee)).to.not.be.NaN",
+													"        pm.expect(Number(RespData.created_at)).to.not.be.NaN",
+													"        pm.expect(RespData.updated_at).to.be.a(\"number\")",
+													"        pm.expect(RespData.created_at).to.be.a(\"number\")",
+													"    }",
+													"})"
+												]
+											}
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Trade",
+							"item": [
+								{
+									"name": "Get Trades History",
+									"item": [
+										{
+											"name": "Get trades history",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"resp = pm.response.json()",
+															"const RespData = resp.data",
+															"pm.test(\"Trades recode\", () => {",
+															"    pm.expect(RespData.length).to.be.above(0)",
+															"})"
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "BG-API-KEY",
+														"value": "{{BG-API-KEY}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-TIMESTAMP",
+														"value": "{{BG-API-TIMESTAMP}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-NONCE",
+														"value": "{{BG-API-NONCE}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-SIGN",
+														"value": "{{BG-API-SIGN}}",
+														"type": "text"
+													}
+												],
+												"url": {
+													"raw": "http://{{base_url}}/v1/exchange/trade/history",
+													"protocol": "http",
+													"host": [
+														"{{base_url}}"
+													],
+													"path": [
+														"v1",
+														"exchange",
+														"trade",
+														"history"
+													],
+													"query": [
+														{
+															"key": "start_time",
+															"value": "12345",
+															"disabled": true
+														},
+														{
+															"key": "end_time",
+															"value": "12346",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get trades history BTCTWD",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"resp = pm.response.json()",
+															"pm.test(\"Correct Market\", () => {",
+															"    for (var i=0;i<resp.data.length;i++){",
+															"        RespData = resp.data[i]",
+															"        pm.expect(RespData.market).to.be.eql(\"BTCTWD\")",
+															"    }  ",
+															"})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "BG-API-KEY",
+														"value": "{{BG-API-KEY}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-TIMESTAMP",
+														"value": "{{BG-API-TIMESTAMP}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-NONCE",
+														"value": "{{BG-API-NONCE}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-SIGN",
+														"value": "{{BG-API-SIGN}}",
+														"type": "text"
+													}
+												],
+												"url": {
+													"raw": "http://{{base_url}}/v1/exchange/trade/history?market=BTCTWD",
+													"protocol": "http",
+													"host": [
+														"{{base_url}}"
+													],
+													"path": [
+														"v1",
+														"exchange",
+														"trade",
+														"history"
+													],
+													"query": [
+														{
+															"key": "market",
+															"value": "BTCTWD"
+														},
+														{
+															"key": "start_time",
+															"value": "1634054400",
+															"disabled": true
+														},
+														{
+															"key": "end_time",
+															"value": "1634054400",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get trades history ETHTWD",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"resp = pm.response.json()",
+															"pm.test(\"Correct Market\", () => {",
+															"    for (var i=0;i<resp.data.length;i++){",
+															"        RespData = resp.data[i]",
+															"        pm.expect(RespData.market).to.be.eql(\"ETHTWD\")",
+															"    }  ",
+															"})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "BG-API-KEY",
+														"value": "{{BG-API-KEY}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-TIMESTAMP",
+														"value": "{{BG-API-TIMESTAMP}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-NONCE",
+														"value": "{{BG-API-NONCE}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-SIGN",
+														"value": "{{BG-API-SIGN}}",
+														"type": "text"
+													}
+												],
+												"url": {
+													"raw": "http://{{base_url}}/v1/exchange/trade/history?market=ETHTWD",
+													"protocol": "http",
+													"host": [
+														"{{base_url}}"
+													],
+													"path": [
+														"v1",
+														"exchange",
+														"trade",
+														"history"
+													],
+													"query": [
+														{
+															"key": "market",
+															"value": "ETHTWD"
+														},
+														{
+															"key": "start_time",
+															"value": "1634054400",
+															"disabled": true
+														},
+														{
+															"key": "end_time",
+															"value": "1634054400",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get trades history USDTTWD",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"resp = pm.response.json()",
+															"pm.test(\"Correct Market\", () => {",
+															"    for (var i=0;i<resp.data.length;i++){",
+															"        RespData = resp.data[i]",
+															"        pm.expect(RespData.market).to.be.eql(\"USDTTWD\")",
+															"    }  ",
+															"})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "BG-API-KEY",
+														"value": "{{BG-API-KEY}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-TIMESTAMP",
+														"value": "{{BG-API-TIMESTAMP}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-NONCE",
+														"value": "{{BG-API-NONCE}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-SIGN",
+														"value": "{{BG-API-SIGN}}",
+														"type": "text"
+													}
+												],
+												"url": {
+													"raw": "http://{{base_url}}/v1/exchange/trade/history?market=USDTTWD",
+													"protocol": "http",
+													"host": [
+														"{{base_url}}"
+													],
+													"path": [
+														"v1",
+														"exchange",
+														"trade",
+														"history"
+													],
+													"query": [
+														{
+															"key": "market",
+															"value": "USDTTWD"
+														},
+														{
+															"key": "start_time",
+															"value": "1634054400",
+															"disabled": true
+														},
+														{
+															"key": "end_time",
+															"value": "1634054400",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													"resp = pm.response.json()",
+													"",
+													"pm.test(\"Response has expected fields\", () => {",
+													"    for(var i=0 ; i<resp.data.length ; i++){",
+													"        RespData = resp.data[i]",
+													"        pm.expect(RespData).to.have.any.keys(\"id\")",
+													"        pm.expect(RespData).to.have.any.keys(\"market\")",
+													"        pm.expect(RespData).to.have.any.keys(\"side\")",
+													"        pm.expect(RespData).to.have.any.keys(\"price\")",
+													"        pm.expect(RespData).to.have.any.keys(\"size\")",
+													"        pm.expect(RespData).to.have.any.keys(\"fee\")",
+													"        pm.expect(RespData).to.have.any.keys(\"fee_rate\")",
+													"        pm.expect(RespData).to.have.any.keys(\"fee_currency\")",
+													"        pm.expect(RespData).to.have.any.keys(\"time\")",
+													"",
+													"}})",
+													"",
+													"pm.test(\"Response values have expected type\", () => {",
+													"    for(var i=0 ; i<resp.data.length ; i++){",
+													"        RespData = resp.data[i]",
+													"        utils.VerifyUUID(RespData.id)",
+													"        pm.expect(RespData.market).to.be.a(\"string\")",
+													"        pm.expect(RespData.side).to.be.a(\"string\")",
+													"        pm.expect(RespData.market).to.be.a(\"string\")",
+													"        pm.expect(RespData.fee_currency).to.be.a(\"string\")",
+													"        pm.expect(Number(RespData.time)).to.not.be.NaN",
+													"        pm.expect(Number(RespData.price)).to.be.a(\"number\")",
+													"        // Assert Converion of string to float not be NaN",
+													"        pm.expect(Number(RespData.size)).to.not.be.NaN",
+													"        pm.expect(Number(RespData.fee)).to.not.be.NaN",
+													"        pm.expect(Number(RespData.fee_rate)).to.not.be.NaN",
+													"    }",
+													"})",
+													"",
+													"pm.test(\"Response have expected value\", () => {",
+													"    for (var i=0;i<resp.data.length;i++){",
+													"        pm.expect(RespData.side).to.be.oneOf([\"SELL\",\"BUY\"])",
+													"    }",
+													"})"
+												]
+											}
+										}
+									]
+								},
+								{
+									"name": "Get Quotation",
+									"item": [
+										{
+											"name": "Get quotation",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Test Get Quotation\", function () {",
+															"",
+															"    const responseJson = pm.response.json();",
+															"    console.log(responseJson);",
+															"",
+															"    // 1. check status code",
+															"    pm.response.to.have.status(200);",
+															"",
+															"    // 2. check success or not",
+															"    pm.expect(responseJson.success).to.eql(true);",
+															"",
+															"    // 3. check data content",
+															"    const data = responseJson.data.text();",
+															"    pm.expect(data).to.include(\"id\");",
+															"    pm.variables",
+															"    pm.expect(data).to.include(\"market\");",
+															"    pm.expect(data).to.include(\"side\");",
+															"    pm.expect(data).to.include(\"price\");",
+															"    pm.expect(data).to.include(\"base_amount\");",
+															"    pm.expect(data).to.include(\"quote_amount\");",
+															"    pm.expect(data).to.include(\"fee\");",
+															"    pm.expect(data).to.include(\"fee_rate\");",
+															"    pm.expect(data).to.include(\"fee_currency\");",
+															"    pm.expect(data).to.include(\"created_at\");",
+															"    pm.expect(data).to.include(\"expired_at\");",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "BG-API-KEY",
+														"value": "{{BG-API-KEY}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-TIMESTAMP",
+														"value": "{{BG-API-TIMESTAMP}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-NONCE",
+														"value": "{{BG-API-NONCE}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-SIGN",
+														"value": "{{BG-API-SIGN}}",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"market\": \"TWDUSDT\",\n    \"side\": \"SELL\",\n    \"base_amount\": 10\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "https://{{base_url}}/v1/exchange/trade/quote",
+													"protocol": "https",
+													"host": [
+														"{{base_url}}"
+													],
+													"path": [
+														"v1",
+														"exchange",
+														"trade",
+														"quote"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "Accept Quotation",
+									"item": [
+										{
+											"name": "Accept quotation",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"// pm.test(\"Test Get Quotation\", function () {",
+															"",
+															"//     const responseJson = pm.response.json();",
+															"//     console.log(responseJson);",
+															"",
+															"//     // 1. check status code",
+															"//     pm.response.to.have.status(200);",
+															"",
+															"//     // 2. check success or not",
+															"//     const responseJson = pm.response.json();",
+															"//     pm.expect(responseJson.success).to.eql(true);",
+															" ",
+															"// });"
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															"",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "BG-API-KEY",
+														"value": "{{BG-API-KEY}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-TIMESTAMP",
+														"value": "{{BG-API-TIMESTAMP}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-NONCE",
+														"value": "{{BG-API-NONCE}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-SIGN",
+														"value": "{{BG-API-SIGN}}",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"id\":\"{{quotation_id}}\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "https://{{base_url}}/v1/exchange/trade/quote/accept",
+													"protocol": "https",
+													"host": [
+														"{{base_url}}"
+													],
+													"path": [
+														"v1",
+														"exchange",
+														"trade",
+														"quote",
+														"accept"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Currency",
+							"item": [
+								{
+									"name": "Get Currencies",
+									"item": [
+										{
+											"name": "Get currencies",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"resp = pm.response.json()",
+															"",
+															"pm.test(\"Currency type\", () => {",
+															"    for (var i=0;i<resp.data.length;i++){",
+															"        RespData = resp.data[i]",
+															"        pm.expect(RespData.currency).to.be.oneOf([\"BTC\",\"ETH\",\"USDT\",\"TWD\"])",
+															"    }",
+															"})",
+															"",
+															"pm.test(\"Get all currencies\", () => {",
+															"    pm.expect(resp.data).to.have.lengthOf(4)",
+															"})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "BG-API-KEY",
+														"value": "{{BG-API-KEY}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-TIMESTAMP",
+														"value": "{{BG-API-TIMESTAMP}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-NONCE",
+														"value": "{{BG-API-NONCE}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-SIGN",
+														"value": "{{BG-API-SIGN}}",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://{{base_url}}/v1/exchange/currencies",
+													"protocol": "http",
+													"host": [
+														"{{base_url}}"
+													],
+													"path": [
+														"v1",
+														"exchange",
+														"currencies"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get currencies BTC",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"resp = pm.response.json()",
+															"",
+															"pm.test(\"Currency type\", () =>  {",
+															"    pm.expect(resp.data[0].currency).to.be.eql(\"BTC\")",
+															"});",
+															"",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "BG-API-KEY",
+														"value": "{{BG-API-KEY}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-TIMESTAMP",
+														"value": "{{BG-API-TIMESTAMP}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-NONCE",
+														"value": "{{BG-API-NONCE}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-SIGN",
+														"value": "{{BG-API-SIGN}}",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://{{base_url}}/v1/exchange/currencies?currency=BTC",
+													"protocol": "http",
+													"host": [
+														"{{base_url}}"
+													],
+													"path": [
+														"v1",
+														"exchange",
+														"currencies"
+													],
+													"query": [
+														{
+															"key": "currency",
+															"value": "BTC"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get currencies ETH",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"resp = pm.response.json()",
+															"",
+															"pm.test(\"Currency type\", () =>  {",
+															"    pm.expect(resp.data[0].currency).to.be.eql(\"ETH\")",
+															"});",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "BG-API-KEY",
+														"value": "{{BG-API-KEY}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-TIMESTAMP",
+														"value": "{{BG-API-TIMESTAMP}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-NONCE",
+														"value": "{{BG-API-NONCE}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-SIGN",
+														"value": "{{BG-API-SIGN}}",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://{{base_url}}/v1/exchange/currencies?currency=ETH",
+													"protocol": "http",
+													"host": [
+														"{{base_url}}"
+													],
+													"path": [
+														"v1",
+														"exchange",
+														"currencies"
+													],
+													"query": [
+														{
+															"key": "currency",
+															"value": "ETH"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get currencies USDT",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"resp = pm.response.json()",
+															"",
+															"pm.test(\"Currency type\", () =>  {",
+															"    pm.expect(resp.data[0].currency).to.be.eql(\"USDT\")",
+															"});",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "BG-API-KEY",
+														"value": "{{BG-API-KEY}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-TIMESTAMP",
+														"value": "{{BG-API-TIMESTAMP}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-NONCE",
+														"value": "{{BG-API-NONCE}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-SIGN",
+														"value": "{{BG-API-SIGN}}",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://{{base_url}}/v1/exchange/currencies?currency=USDT",
+													"protocol": "http",
+													"host": [
+														"{{base_url}}"
+													],
+													"path": [
+														"v1",
+														"exchange",
+														"currencies"
+													],
+													"query": [
+														{
+															"key": "currency",
+															"value": "USDT"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													"resp = pm.response.json()",
+													"pm.test(\"Response has expected fields\", () =>  {",
+													"    for(var i=0 ; i<resp.data.length ; i++){ ",
+													"        RespData = resp.data[i]",
+													"        pm.expect(RespData).to.have.any.keys(\"currency\")",
+													"        pm.expect(RespData).to.have.any.keys(\"supported_chains\")",
+													"        for(var j=0; j<RespData.supported_chains.length; j++){",
+													"            ChainInfo = RespData.supported_chains[j]",
+													"            pm.expect(ChainInfo).to.have.any.keys(\"chain\")",
+													"            pm.expect(ChainInfo).to.have.any.keys(\"withdrawal_fee\")",
+													"            pm.expect(ChainInfo).to.have.any.keys(\"min_withdrawal_size\")",
+													"        }",
+													"    }",
+													"});",
+													"",
+													"pm.test(\"Response values have expected type\", () => {",
+													"    for(var i=0 ; i<resp.data.length ; i++){ ",
+													"        pm.expect(RespData.currency).to.be.a(\"string\")",
+													"        pm.expect(RespData.supported_chains).to.be.an(\"array\")",
+													"        for(var j=0; j<RespData.supported_chains.length; j++){",
+													"            ChainInfo = RespData.supported_chains[0]",
+													"            pm.expect(ChainInfo.chain).to.be.a(\"string\")",
+													"            pm.expect(Number(ChainInfo.withdrawal_fee)).to.not.be.NaN",
+													"            pm.expect(Number(ChainInfo.min_withdrawal_size)).to.not.be.NaN",
+													"        }",
+													"    }",
+													"})"
+												]
+											}
+										}
+									]
+								}
+							],
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							]
+						},
+						{
+							"name": "Markets",
+							"item": [
+								{
+									"name": "Get Markets",
+									"item": [
+										{
+											"name": "Get markets",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"resp = pm.response.json()",
+															"",
+															"pm.test(\"Get all markets\", () => {",
+															"    pm.expect(resp.data).lengthOf(3)",
+															"})",
+															"pm.test(\"Market type\", () => {",
+															"    for (var i=0;i<resp.data.length;i++){",
+															"        RespData = resp.data[i]",
+															"        pm.expect(RespData.market).to.be.oneOf([\"ETHTWD\",\"BTCTWD\",\"USDTTWD\"])",
+															"    }",
+															"})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "BG-API-KEY",
+														"value": "{{BG-API-KEY}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-TIMESTAMP",
+														"value": "{{BG-API-TIMESTAMP}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-NONCE",
+														"value": "{{BG-API-NONCE}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-SIGN",
+														"value": "{{BG-API-SIGN}}",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://{{base_url}}/v1/exchange/markets",
+													"protocol": "http",
+													"host": [
+														"{{base_url}}"
+													],
+													"path": [
+														"v1",
+														"exchange",
+														"markets"
+													],
+													"query": [
+														{
+															"key": "",
+															"value": null,
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get markets BTCTWD",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"resp = pm.response.json()",
+															"const RespData = resp.data[0]",
+															"",
+															"pm.test(\"Market is BTCTWD\", () => {",
+															"    pm.expect(RespData.market).to.be.eql(\"BTCTWD\")",
+															"})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "BG-API-KEY",
+														"value": "{{BG-API-KEY}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-TIMESTAMP",
+														"value": "{{BG-API-TIMESTAMP}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-NONCE",
+														"value": "{{BG-API-NONCE}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-SIGN",
+														"value": "{{BG-API-SIGN}}",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://{{base_url}}/v1/exchange/markets?market=BTCTWD",
+													"protocol": "http",
+													"host": [
+														"{{base_url}}"
+													],
+													"path": [
+														"v1",
+														"exchange",
+														"markets"
+													],
+													"query": [
+														{
+															"key": "market",
+															"value": "BTCTWD"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get markets ETHTWD",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"resp = pm.response.json()",
+															"const RespData = resp.data[0]",
+															"",
+															"pm.test(\"Market is ETHTWD\", () => {",
+															"    pm.expect(RespData.market).to.be.eql(\"ETHTWD\")",
+															"})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "BG-API-KEY",
+														"value": "{{BG-API-KEY}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-TIMESTAMP",
+														"value": "{{BG-API-TIMESTAMP}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-NONCE",
+														"value": "{{BG-API-NONCE}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-SIGN",
+														"value": "{{BG-API-SIGN}}",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://{{base_url}}/v1/exchange/markets?market=ETHTWD",
+													"protocol": "http",
+													"host": [
+														"{{base_url}}"
+													],
+													"path": [
+														"v1",
+														"exchange",
+														"markets"
+													],
+													"query": [
+														{
+															"key": "market",
+															"value": "ETHTWD"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get markets USDTTWD",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"resp = pm.response.json()",
+															"const RespData = resp.data[0]",
+															"",
+															"pm.test(\"Market is USDTTWD\", () => {",
+															"    pm.expect(RespData.market).to.be.eql(\"USDTTWD\")",
+															"})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "BG-API-KEY",
+														"value": "{{BG-API-KEY}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-TIMESTAMP",
+														"value": "{{BG-API-TIMESTAMP}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-NONCE",
+														"value": "{{BG-API-NONCE}}",
+														"type": "text"
+													},
+													{
+														"key": "BG-API-SIGN",
+														"value": "{{BG-API-SIGN}}",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://{{base_url}}/v1/exchange/markets?market=USDTTWD",
+													"protocol": "http",
+													"host": [
+														"{{base_url}}"
+													],
+													"path": [
+														"v1",
+														"exchange",
+														"markets"
+													],
+													"query": [
+														{
+															"key": "market",
+															"value": "USDTTWD"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													"resp = pm.response.json()",
+													"pm.test(\"Response has expected fields\", () =>  {",
+													"    for(var i=0 ; i<resp.data.length ; i++){ ",
+													"        RespData = resp.data[i]",
+													"        pm.expect(RespData).to.have.any.keys(\"market\")",
+													"        pm.expect(RespData).to.have.any.keys(\"base_currency\")",
+													"        pm.expect(RespData).to.have.any.keys(\"quote_currency\")",
+													"        pm.expect(RespData).to.have.any.keys(\"price_increment\")",
+													"        pm.expect(RespData).to.have.any.keys(\"size_increment\")",
+													"        pm.expect(RespData).to.have.any.keys(\"max_order_size\")",
+													"        pm.expect(RespData).to.have.any.keys(\"min_order_size\")",
+													"        pm.expect(RespData).to.have.any.keys(\"fee_rate\")",
+													"        pm.expect(RespData).to.have.any.keys(\"ask\")",
+													"        pm.expect(RespData).to.have.any.keys(\"bid\")",
+													"    }",
+													"});",
+													"",
+													"pm.test(\"Response values have expected type\", () => {",
+													"    for(var i=0 ; i<resp.data.length ; i++){ ",
+													"        pm.expect(RespData.market).to.be.a(\"string\")",
+													"        pm.expect(RespData.base_currency).to.be.a(\"string\")",
+													"        pm.expect(RespData.quote_currency).to.be.a(\"string\")",
+													"        pm.expect(Number(RespData.price_increment)).to.not.be.NaN",
+													"        pm.expect(Number(RespData.size_increment)).to.not.be.NaN",
+													"        pm.expect(Number(RespData.max_order_size)).to.not.be.NaN",
+													"        pm.expect(Number(RespData.min_order_size)).to.not.be.NaN",
+													"        pm.expect(Number(RespData.bid)).to.not.be.NaN",
+													"        pm.expect(Number(RespData.fee_rate)).to.not.be.NaN",
+													"        pm.expect(Number(RespData.ask)).to.not.be.NaN",
+													"    }",
+													"})"
+												]
+											}
+										}
+									]
+								}
+							],
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"resp = pm.response.json()",
+											"pm.test(\"Response has expected fields\", () =>  {",
+											"    for(var i=0 ; i<resp.data.length ; i++){ ",
+											"        RespData = resp.data[i]",
+											"        pm.expect(RespData).to.have.any.keys(\"market\")",
+											"        pm.expect(RespData).to.have.any.keys(\"base_currency\")",
+											"        pm.expect(RespData).to.have.any.keys(\"quote_currency\")",
+											"        pm.expect(RespData).to.have.any.keys(\"price_increment\")",
+											"        pm.expect(RespData).to.have.any.keys(\"size_increment\")",
+											"        pm.expect(RespData).to.have.any.keys(\"max_order_size\")",
+											"        pm.expect(RespData).to.have.any.keys(\"min_order_size\")",
+											"        pm.expect(RespData).to.have.any.keys(\"fee_rate\")",
+											"        pm.expect(RespData).to.have.any.keys(\"ask\")",
+											"        pm.expect(RespData).to.have.any.keys(\"bid\")",
+											"    }",
+											"});",
+											"",
+											"pm.test(\"Response values have expected type\", () => {",
+											"    for(var i=0 ; i<resp.data.length ; i++){ ",
+											"        pm.expect(RespData.market).to.be.a(\"string\")",
+											"        pm.expect(RespData.base_currency).to.be.a(\"string\")",
+											"        pm.expect(RespData.quote_currency).to.be.a(\"string\")",
+											"        pm.expect(Number(RespData.price_increment)).to.not.be.NaN",
+											"        pm.expect(Number(RespData.size_increment)).to.not.be.NaN",
+											"        pm.expect(Number(RespData.max_order_size)).to.not.be.NaN",
+											"        pm.expect(Number(RespData.min_order_size)).to.not.be.NaN",
+											"        pm.expect(Number(RespData.bid)).to.not.be.NaN",
+											"        pm.expect(Number(RespData.fee_rate)).to.not.be.NaN",
+											"        pm.expect(Number(RespData.ask)).to.not.be.NaN",
+											"    }",
+											"})"
+										]
+									}
+								}
+							]
+						}
+					]
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"const responseJson = pm.response.json();",
+							"// 1. check status code",
+							"pm.test(\"Status is 200\", () => {",
+							"    pm.expect(pm.response.to.have.status(200));",
+							"});",
+							"// 2. check success or not",
+							"pm.test(\"Success Response\", () => {    ",
+							"    pm.expect(responseJson.success).to.eql(true);",
+							"})"
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Fail",
+			"item": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"var key = pm.collectionVariables.get(\"BG-API-KEY\")",
+					"var secret = pm.collectionVariables.get(\"BG-API-SECRET\")",
+					"var ts = Math.floor(Date.now() / 1000)",
+					"var nonce = pm.variables.replaceIn('{{$randomInt}}').toString(16).toLowerCase().padStart(8, '0')",
+					"var method = pm.request.method",
+					"var path = pm.request.url.getPath()",
+					"var body = pm.request.body",
+					"var payload = method + path + nonce + ts",
+					"if (body != null) {",
+					"    payload += body.toString().replaceAll(' ','').replaceAll('\\n','')",
+					"}",
+					"",
+					"var signature = CryptoJS.HmacSHA256(payload, secret).toString(CryptoJS.digest)",
+					"pm.collectionVariables.set(\"BG-API-TIMESTAMP\", ts)",
+					"pm.collectionVariables.set(\"BG-API-NONCE\", nonce)",
+					"pm.collectionVariables.set(\"BG-API-SIGN\", signature)",
+					"",
+					"console.log(\"payload\", payload)",
+					"",
+					"utils = {",
+					"    VerifyUUID: function(id){",
+					"        pm.expect(id).to.have.lengthOf(36);",
+					"    }",
+					"};"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"const responseJson = pm.response.json();",
+					"",
+					"// heck response time",
+					"pm.test(\"Response time is less than 1500ms\", () =>{",
+					"    pm.expect(pm.response.responseTime).to.be.below(1500);",
+					"});",
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BG-API-KEY",
+			"value": "nLRk8s1CiQoDR0oS9Xcv"
+		},
+		{
+			"key": "BG-API-SECRET",
+			"value": "X6afw9XzyFICIgZnnNhdVOhbWBu7PrRSubr7HOcn"
+		},
+		{
+			"key": "BG-API-TIMESTAMP",
+			"value": "0"
+		},
+		{
+			"key": "BG-API-NONCE",
+			"value": "0"
+		},
+		{
+			"key": "BG-API-SIGN",
+			"value": ""
+		},
+		{
+			"key": "base_url",
+			"value": "api.bitgin.app"
+		},
+		{
+			"key": "quotation_id",
+			"value": "ad122e63-9112-499e-be60-1997f9455f6b"
+		}
+	]
+}
